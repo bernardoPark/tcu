@@ -1,0 +1,393 @@
+/* =========================================================
+   MEMBERSHIP APPLICATION — modal dialog
+   Read from the 1440 capture: 544 × 742, content inset 32.
+   --u is one artboard unit. It follows the page shell (so the
+   form keeps its size against the page on a large screen) but
+   never drops below the design's own pixel.
+   ========================================================= */
+
+.apply {
+  --u: 1px;
+  --apply-bg: #0E0D0D;
+  --apply-field: #F5F5F5;
+
+  inline-size: min(544 * var(--u), 100vw - 2rem);
+  block-size: min(742 * var(--u), 100dvh - 2rem);
+  max-inline-size: none;
+  max-block-size: none;
+  margin: auto;
+  padding: 0;
+  border: max(1px, var(--u)) solid var(--apply-field);
+  background-color: var(--apply-bg);
+  color: var(--clr-paper);
+  overflow: hidden;
+
+  /* fade and lift in, reverse on close */
+  opacity: 0;
+  translate: 0 calc(12 * var(--u));
+  transition:
+    opacity 0.28s ease,
+    translate 0.28s ease,
+    overlay 0.28s allow-discrete,
+    display 0.28s allow-discrete;
+}
+@media (min-width: 48em) {
+  .apply {
+    --u: max(1px, min(100vw, var(--stage-max)) * var(--page-scale) / 1440);
+  }
+}
+.apply[open] { opacity: 1; translate: 0 0; }
+@starting-style {
+  .apply[open] { opacity: 0; translate: 0 calc(12 * var(--u)); }
+}
+
+.apply::backdrop {
+  background-color: rgb(0 0 0 / 0);
+  transition:
+    background-color 0.28s ease,
+    overlay 0.28s allow-discrete,
+    display 0.28s allow-discrete;
+}
+.apply[open]::backdrop { background-color: rgb(0 0 0 / 0.45); }
+@starting-style {
+  .apply[open]::backdrop { background-color: rgb(0 0 0 / 0); }
+}
+
+/* the page behind stays put while the form is open */
+html:has(.apply[open]) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+/* ---------------------------------------------------------
+   CLOSE — pinned to the corner, doesn't scroll away
+   --------------------------------------------------------- */
+.apply__close {
+  position: absolute;
+  inset-block-start: calc(6 * var(--u));
+  inset-inline-end: calc(6 * var(--u));
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  inline-size: calc(27 * var(--u));
+  block-size: calc(27 * var(--u));
+  padding: 0 0 0.08em;
+  border: 0;
+  background-color: var(--apply-field);
+  color: var(--apply-bg);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(24 * var(--u));
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.apply__close:hover,
+.apply__close:focus-visible {
+  background-color: var(--clr-red);
+  color: var(--clr-paper);
+}
+
+/* ---------------------------------------------------------
+   SCROLLING BODY
+   --------------------------------------------------------- */
+.apply__scroll {
+  block-size: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: calc(16 * var(--u)) 0 calc(36 * var(--u));
+  scrollbar-width: thin;
+  scrollbar-color: var(--apply-field) transparent;
+}
+/* content is placed from the dialog's left edge at a fixed 480, so the
+   scrollbar sits in the right-hand margin instead of narrowing the fields */
+.apply__form,
+.apply__done {
+  inline-size: calc(480 * var(--u));
+  margin-inline-start: calc(32 * var(--u));
+}
+
+.apply__logo {
+  margin: 0 0 calc(40 * var(--u)) calc(209 * var(--u));   /* centred on the 544 box */
+  inline-size: calc(126 * var(--u));
+}
+.apply__logo img { inline-size: 100%; block-size: auto; }
+
+.apply__group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-inline-size: 0;
+}
+.apply__group + .apply__group { margin-block-start: calc(30 * var(--u)); }
+
+.apply__label {
+  display: block;
+  float: left;            /* lets a legend take margins like a label */
+  inline-size: 100%;
+  margin: 0 0 calc(8 * var(--u));
+  padding: 0;
+  font-family: var(--font-kr);
+  font-weight: 600;
+  font-size: calc(12 * var(--u));
+  line-height: 1.2;
+}
+
+.apply__input,
+.apply__textarea {
+  display: block;
+  clear: both;
+  inline-size: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--apply-field);
+  color: var(--apply-bg);
+  font-family: var(--font-kr);
+  font-weight: 400;
+  font-size: calc(12 * var(--u));
+}
+.apply__input {
+  block-size: calc(28 * var(--u));
+  padding: 0 calc(6 * var(--u));
+}
+.apply__textarea {
+  block-size: calc(73 * var(--u));
+  min-block-size: 0;
+  padding: calc(7 * var(--u)) calc(6 * var(--u));
+  line-height: 1.4;
+  resize: none;
+}
+.apply__input::placeholder,
+.apply__textarea::placeholder { color: #7A7A7A; opacity: 1; }
+
+.apply__input:focus-visible,
+.apply__textarea:focus-visible {
+  outline: max(2px, 2 * var(--u)) solid var(--clr-red);
+  outline-offset: 0;
+}
+
+/* ---------------------------------------------------------
+   CHECKBOX GRIDS
+   --------------------------------------------------------- */
+.apply__checks {
+  clear: both;
+  display: grid;
+  grid-template-columns: repeat(3, calc(124 * var(--u))) minmax(0, 1fr);   /* columns at 0 / 124 / 248 / 372 */
+  gap: calc(13 * var(--u)) 0;
+}
+.apply__checks--3 { grid-template-columns: calc(182 * var(--u)) calc(197 * var(--u)) minmax(0, 1fr); }
+
+.apply__check {
+  display: flex;
+  align-items: center;
+  gap: calc(6 * var(--u));
+  font-family: var(--font-kr);
+  font-weight: 400;
+  font-size: calc(16 * var(--u));
+  line-height: 1.2;
+  cursor: pointer;
+}
+.apply__check input {
+  flex: none;
+  appearance: none;
+  inline-size: calc(28 * var(--u));
+  block-size: calc(28 * var(--u));
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--apply-field);
+  cursor: pointer;
+  transition: box-shadow 0.15s ease, background-color 0.15s ease;
+}
+/* checked: a solid dark square inside the white one */
+.apply__check input:checked {
+  background-color: var(--apply-bg);
+  box-shadow: inset 0 0 0 calc(6 * var(--u)) var(--apply-field);
+}
+.apply__check input:focus-visible {
+  outline: max(2px, 2 * var(--u)) solid var(--clr-red);
+  outline-offset: max(2px, 2 * var(--u));
+}
+
+/* ---------------------------------------------------------
+   SUBMIT
+   --------------------------------------------------------- */
+.apply__submit {
+  display: block;
+  margin: calc(67 * var(--u)) auto 0;
+  block-size: calc(48 * var(--u));
+  padding: 0 calc(14 * var(--u)) 0.1em;
+  border: 0;
+  background-color: var(--apply-field);
+  color: var(--apply-bg);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(27 * var(--u));
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.apply__submit:hover,
+.apply__submit:focus-visible {
+  background-color: var(--clr-red);
+  color: var(--clr-paper);
+}
+
+/* ---------------------------------------------------------
+   SENT — a receipt, like the order forms and the club card:
+   entry number, date, and where the application stands
+   --------------------------------------------------------- */
+.apply__done[hidden] { display: none; }
+
+.receipt {
+  position: relative;
+  padding: calc(22 * var(--u)) calc(24 * var(--u)) calc(24 * var(--u));
+  background-color: var(--apply-field);
+  color: var(--apply-bg);
+}
+
+.receipt__title {
+  margin: 0 0 calc(18 * var(--u));
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(20 * var(--u));
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+/* number on the left, date and name stacked on the right */
+.receipt__meta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: calc(12 * var(--u)) calc(28 * var(--u));
+  margin: 0;
+  padding-block-end: calc(18 * var(--u));
+  border-block-end: max(1px, var(--u)) dashed var(--apply-bg);
+}
+.receipt__meta-no { grid-row: span 2; }
+.receipt__meta dt {
+  margin: 0 0 calc(4 * var(--u));
+  font-family: var(--font-kr);
+  font-weight: 600;
+  font-size: calc(10 * var(--u));
+  letter-spacing: 0.06em;
+}
+.receipt__meta dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(18 * var(--u));
+  line-height: 1;
+}
+.receipt__meta dd.receipt__no {
+  font-size: calc(88 * var(--u));
+  line-height: 0.78;
+  letter-spacing: -0.02em;
+}
+
+/* the four steps from the membership page; done = filled square */
+.receipt__steps {
+  display: grid;
+  gap: calc(10 * var(--u));
+  margin: calc(18 * var(--u)) 0;
+  padding: 0;
+  list-style: none;
+}
+.receipt__steps li {
+  display: grid;
+  grid-template-columns: calc(20 * var(--u)) calc(66 * var(--u)) 1fr auto;
+  white-space: nowrap;
+  align-items: center;
+  gap: calc(10 * var(--u));
+  color: #9A9A9A;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(20 * var(--u));
+  line-height: 1;
+}
+.receipt__steps li::before {
+  content: "";
+  inline-size: calc(20 * var(--u));
+  block-size: calc(20 * var(--u));
+  border: calc(2 * var(--u)) solid currentColor;
+}
+.receipt__steps li.is-done,
+.receipt__steps li.is-current { color: var(--apply-bg); }
+.receipt__steps li.is-done::before { background-color: currentColor; }
+.receipt__status {
+  font-family: var(--font-kr);
+  font-weight: 600;
+  font-size: calc(12 * var(--u));
+}
+.receipt__steps li.is-current .receipt__status { color: var(--clr-red); }
+
+.receipt__note {
+  margin: 0;
+  padding-block-start: calc(16 * var(--u));
+  border-block-start: max(1px, var(--u)) dashed var(--apply-bg);
+  font-family: var(--font-kr);
+  font-weight: 500;
+  font-size: calc(13 * var(--u));
+  line-height: 1.5;
+  word-break: keep-all;
+  overflow-wrap: anywhere;   /* a long email address still wraps */
+}
+
+/* rubber stamp, knocked onto the corner a beat after the receipt shows */
+.receipt__stamp {
+  position: absolute;
+  inset-block-start: calc(14 * var(--u));
+  inset-inline-end: calc(18 * var(--u));
+  margin: 0;
+  padding: 0.08em 0.28em 0.16em;
+  border: calc(3 * var(--u)) solid var(--clr-red);
+  color: var(--clr-red);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(26 * var(--u));
+  line-height: 1;
+  letter-spacing: 0.04em;
+  rotate: -8deg;
+  opacity: 0.92;
+  pointer-events: none;
+}
+.apply__done:not([hidden]) .receipt__stamp {
+  animation: stamp 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.3) 0.25s both;
+}
+@keyframes stamp {
+  from { scale: 1.8; opacity: 0; }
+  to   { scale: 1;   opacity: 0.92; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .apply__done:not([hidden]) .receipt__stamp { animation: none; }
+}
+
+.apply__done .apply__submit { margin-block-start: calc(40 * var(--u)); }
+
+/* =========================================================
+   NARROW — full-height sheet, fewer columns, 16px inputs so
+   phones don't zoom in on focus
+   ========================================================= */
+@media (max-width: 47.99em) {
+  .apply { block-size: calc(100dvh - 2rem); }
+  .apply__scroll { padding-block-start: 44px; }
+  .apply__form,
+  .apply__done { inline-size: auto; margin-inline: 20px; }
+  .apply__logo { margin-inline: auto; }
+  .apply__label { font-size: 13px; }
+  .apply__input,
+  .apply__textarea { font-size: 16px; }
+  .apply__input { block-size: 36px; }
+  .apply__checks { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 8px; }
+  .apply__checks--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .apply__check { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apply,
+  .apply::backdrop { transition: none; }
+}

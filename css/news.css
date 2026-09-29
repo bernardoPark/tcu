@@ -1,0 +1,262 @@
+/* =========================================================
+   NEWS PAGE
+   Artboard 1440 wide, read from design/news. The grid is
+   regular, so it is a real CSS grid rather than a stage —
+   it reflows on its own and keeps the artboard's measures.
+   ========================================================= */
+
+.nw {
+  inline-size: min(100%, var(--stage-max));
+  margin-inline: auto;
+  container-type: inline-size;
+  padding-block-end: 6.94cqw;   /* 100 */
+}
+
+/* ---------------------------------------------------------
+   TITLE ROW — the plate and the two tabs share a baseline
+   --------------------------------------------------------- */
+.nw__head {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.22cqw;                 /* 32 */
+  margin-inline: 8.75%;         /* 126 */
+  margin-block-start: 4.03cqw;  /* 230 - 172 header rule */
+}
+.nw-title {
+  margin: 0;
+  padding: 0.11em 0.13em 0.27em;
+  background-color: var(--clr-paper);
+  color: var(--clr-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 8.99cqw;
+  line-height: 0.78;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.nw-tabs {
+  display: flex;
+  gap: 0.9cqw;                  /* 13 */
+  margin-block-end: 0.07cqw;
+}
+.nw-tab {
+  display: grid;
+  place-items: center;
+  block-size: 4.86cqw;          /* 70 */
+  padding-inline: 0.72cqw;
+  padding-block-end: 0.14em;    /* Antonio sits low — lift it to centre */
+  border: 0.14cqw solid var(--clr-paper);   /* stroke-width 2 */
+  background-color: transparent;
+  color: var(--clr-paper);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3.37cqw;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.nw-tab.is-current,
+.nw-tab[aria-selected="true"] {
+  background-color: var(--clr-paper);
+  color: var(--clr-ink);
+}
+.nw-tab:not(.is-current):hover,
+.nw-tab:not(.is-current):focus-visible {
+  background-color: var(--clr-red);
+  border-color: var(--clr-red);
+}
+
+/* ---------------------------------------------------------
+   CARD GRID
+   --------------------------------------------------------- */
+.nw-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));   /* a long title can't widen its column */
+  column-gap: 4.51cqw;          /* 65  */
+  row-gap: 5.83cqw;             /* 84  */
+  margin: 6.6cqw 8.75% 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nw-card { display: flex; flex-direction: column; }
+/* cards in a row stretch to the tallest; the description box takes up the
+   slack, so boxes and buttons line up across a row whatever the copy length */
+.nw-grid .nw-card__desc { flex-grow: 1; }
+
+/* event titles are English — set in Antonio like the tabs and plates */
+.nw-grid .nw-card__title {
+  display: flex;
+  align-items: center;
+  padding: 0 0.34em 0.1em;      /* Antonio sits low — lift it to centre */
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.5cqw;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nw-card__shot {
+  margin: 0 0 0.9cqw;           /* 13 to the title box */
+  aspect-ratio: 352 / 239;
+  overflow: hidden;
+}
+.nw-card__shot img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.nw-card__title {
+  inline-size: max-content;
+  max-inline-size: 100%;
+  min-block-size: 4.03cqw;      /* 58 */
+  margin: 0;
+  padding: 0.32em 0.44em 0.4em;
+  border: 0.14cqw solid var(--clr-paper);
+  color: var(--clr-paper);
+  font-family: var(--font-kr);
+  font-weight: 600;
+  font-size: 2.08cqw;
+  line-height: 1;
+  word-break: keep-all;
+}
+
+.nw-card__desc {
+  min-block-size: 6.81cqw;      /* 98 */
+  padding: 0.62em 0.5em 0.7em;
+  border: 0.14cqw solid var(--clr-paper);
+  margin-block-start: -0.14cqw; /* the rules overlap into one line */
+  color: #F5F5F5;
+  font-family: var(--font-kr);
+  font-weight: 500;
+  font-size: 1.33cqw;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.nw-card__more {
+  align-self: flex-start;
+  inline-size: 5.56cqw;         /* 80 */
+  block-size: 2.64cqw;          /* 38 */
+  padding: 0;
+  border: 0.14cqw solid var(--clr-paper);
+  margin-block-start: -0.14cqw;
+  background-color: transparent;
+  color: #F5F5F5;
+  font-family: var(--font-kr);
+  font-weight: 500;
+  font-size: 1.53cqw;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.nw-card__more:hover,
+.nw-card__more:focus-visible {
+  background-color: var(--clr-red);
+  border-color: var(--clr-red);
+  color: var(--clr-paper);
+}
+
+/* =========================================================
+   NARROW
+   ========================================================= */
+@media (max-width: 61.99em) {
+  .nw-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 47.99em) {
+  .nw__head {
+    flex-wrap: wrap;
+    gap: var(--space-s);
+    margin-inline: 6%;
+    margin-block-start: var(--space-xl);
+  }
+  .nw-title { font-size: 13cqw; }
+  .nw-tab {
+    block-size: auto;
+    padding: 0.3em 0.5em 0.36em;
+    font-size: 5cqw;
+  }
+
+  .nw-grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--space-xl);
+    margin-inline: 6%;
+    margin-block-start: var(--space-l);
+  }
+  .nw-card__shot { margin-block-end: 2%; }
+  .nw-card__title { min-block-size: 0; font-size: 5.2cqw; }
+  .nw-grid .nw-card__title { padding-block: 0.3em 0.36em; font-size: 6.2cqw; white-space: normal; }
+  .nw-card__desc { min-block-size: 0; font-size: 3.7cqw; }
+  .nw-card__more {
+    inline-size: auto;
+    block-size: auto;
+    padding: 0.5em 1em 0.56em;
+    font-size: 3.9cqw;
+  }
+}
+
+/* =========================================================
+   EDITORIAL PANEL — two columns of unequal width, each
+   stacking its own cards, so the rows stagger by content.
+   ========================================================= */
+.nw-ed {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.81cqw;                 /* 26 */
+  margin: 6.6cqw 8.75% 0;
+}
+.nw-ed__col {
+  display: flex;
+  flex-direction: column;
+  gap: 5.83cqw;                 /* 84, same rhythm as the events grid */
+}
+.nw-ed__col--wide   { flex: 0 0 56.1%; }
+.nw-ed__col--narrow { flex: 0 0 42.1%; }
+
+/* editorial titles — English, in Antonio like the event titles; these may
+   wrap, so the box pads top and bottom rather than centring one line */
+.nw-card--ed .nw-card__title {
+  display: flex;
+  align-items: center;
+  padding: 0.14em 0.34em 0.24em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.5cqw;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.nw-card--ed .nw-card__desc  { min-block-size: 0; }
+
+.nw-card__shot--wide { aspect-ratio: 664 / 400; }
+.nw-card__shot--tall { aspect-ratio: 498 / 612; }
+/* a landscape photo in the tall frame — crop from left of centre */
+.nw-card__shot--left img { object-position: 28% 50%; }
+
+/* panels swap without a layout jump */
+[role="tabpanel"][hidden] { display: none; }
+[role="tabpanel"]:focus-visible { outline: var(--border-thin) solid var(--clr-red); outline-offset: 4px; }
+
+@media (max-width: 61.99em) {
+  .nw-ed__col--wide   { flex: 1 1 0; }
+  .nw-ed__col--narrow { flex: 1 1 0; }
+}
+@media (max-width: 47.99em) {
+  .nw-ed {
+    flex-direction: column;
+    gap: var(--space-xl);
+    margin-inline: 6%;
+    margin-block-start: var(--space-l);
+  }
+  .nw-ed__col { gap: var(--space-xl); inline-size: 100%; }
+  .nw-card--ed .nw-card__title { padding-block: 0.3em 0.36em; font-size: 6.2cqw; }
+}

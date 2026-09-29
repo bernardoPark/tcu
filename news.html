@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEWS — THE CLUB UNDERCRAFT</title>
+<meta name="description" content="THE CLUB UNDERCRAFT의 이벤트와 에디토리얼. 딥컷 공유 모임, 멤버 자작곡 감상회 등 클럽의 오프라인 활동 소식.">
+<meta name="theme-color" content="#0E0D0D">
+
+<meta property="og:title" content="NEWS — THE CLUB UNDERCRAFT">
+<meta property="og:description" content="클럽의 이벤트와 에디토리얼.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/join.css">
+<link rel="stylesheet" href="css/news.css">
+</head>
+
+<body class="page-join page-news">
+<a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+<!-- ==================================================================== -->
+<!-- HEADER                                                               -->
+<!-- ==================================================================== -->
+<header class="jp-header">
+  <div class="jp-header__inner">
+    <a class="jp-brand" href="index.html" aria-label="THE CLUB UNDERCRAFT — home">
+      <img src="assets/img/logo-wordmark.png" alt="" width="478" height="156">
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="visually-hidden">메뉴 열기</span>
+    </button>
+
+    <nav class="jp-nav site-nav" id="site-nav" aria-label="주요 메뉴">
+      <ul role="list" class="site-nav__list">
+        <li><a href="join.html">JOIN</a></li>
+        <li><a href="news.html" aria-current="page">NEWS</a></li>
+        <li><a href="about.html">ABOUT</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="nw" id="main">
+
+  <!-- ---- title row --------------------------------------------------- -->
+  <div class="nw__head">
+    <h1 class="nw-title">NEWS</h1>
+    <div class="nw-tabs" role="tablist" aria-label="소식 분류">
+      <button class="nw-tab is-current" type="button" role="tab" id="tab-events"
+              aria-selected="true" aria-controls="panel-events">EVENTS</button>
+      <button class="nw-tab" type="button" role="tab" id="tab-editorial"
+              aria-selected="false" aria-controls="panel-editorial" tabindex="-1">EDITORIAL</button>
+    </div>
+  </div>
+
+  <!-- ---- EVENTS ------------------------------------------------------- -->
+  <div id="panel-events" role="tabpanel" aria-labelledby="tab-events" tabindex="0">
+  <ul class="nw-grid" role="list">
+
+    <li class="nw-card">
+      <figure class="nw-card__shot">
+        <img src="assets/img/deepcutsharing.png" alt="레코드숍 진열대 앞에서 LP를 함께 들여다보는 두 사람" width="1536" height="1024" loading="eager">
+      </figure>
+      <h2 class="nw-card__title">DEEP CUT SHARING</h2>
+      <p class="nw-card__desc">멤버들이 아끼는 숨은 음반과 음악을 소개하고 이야기하는 모임입니다.</p>
+      <button class="nw-card__more" type="button">더보기</button>
+    </li>
+
+    <li class="nw-card">
+      <figure class="nw-card__shot">
+        <img src="assets/img/membertracks.png" alt="붉은 조명 아래 신시사이저로 곡을 연주하는 멤버와 둘러앉은 관객" width="1448" height="1086" loading="eager">
+      </figure>
+      <h2 class="nw-card__title">MEMBER TRACKS</h2>
+      <p class="nw-card__desc">멤버들이 직접 만든 음악을 함께 듣고 이야기하는 감상회입니다.</p>
+      <button class="nw-card__more" type="button">더보기</button>
+    </li>
+
+    <li class="nw-card">
+      <figure class="nw-card__shot">
+        <img src="assets/img/screenclub.png" alt="어두운 방에 모니터, 노트북, 프로젝터 화면이 여럿 펼쳐진 스크린 클럽 현장" width="1536" height="1024" loading="eager">
+      </figure>
+      <h2 class="nw-card__title">SCREEN CLUB</h2>
+      <p class="nw-card__desc">영상, 웹페이지, 이미지 등 각자의 화면 작업을 함께 보는 임시 전시입니다.</p>
+      <button class="nw-card__more" type="button">더보기</button>
+    </li>
+
+    <li class="nw-card">
+      <figure class="nw-card__shot">
+        <img src="assets/img/strangenight.png" alt="‘STRANGE THINGS ARE WELCOME’ 팻말 옆에서 직접 만든 전자 장치를 만지는 멤버들" width="1536" height="1024" loading="lazy">
+      </figure>
+      <h2 class="nw-card__title">STRANGE THINGS NIGHT</h2>
+      <p class="nw-card__desc">미완성 작업과 실험적인 제작물을 가져와 서로 보여주는 모임입니다.</p>
+      <button class="nw-card__more" type="button">더보기</button>
+    </li>
+
+    <li class="nw-card">
+      <figure class="nw-card__shot">
+        <img src="assets/img/oddstories.png" alt="사라진 웹사이트를 주제로 한 발표 화면 앞에서 마이크를 든 발표자와 청중" width="1536" height="1024" loading="lazy">
+      </figure>
+      <h2 class="nw-card__title">ODD STORIES</h2>
+      <p class="nw-card__desc">낯선 문화와 잘 알려지지 않은 이야기를 짧게 소개하고 나누는 모임입니다.</p>
+      <button class="nw-card__more" type="button">더보기</button>
+    </li>
+
+    <li class="nw-card">
+      <figure class="nw-card__shot">
+        <img src="assets/img/onerabbithole.png" alt="‘ONE RABBIT HOLE’ 팻말과 거리 스티커 사진을 테이블에 펼쳐놓고 살펴보는 멤버들" width="1536" height="1024" loading="lazy">
+      </figure>
+      <h2 class="nw-card__title">ONE RABBIT HOLE</h2>
+      <p class="nw-card__desc">하나의 관심사를 이미지와 자료로 깊게 파고들어 소개하는 리서치 세션입니다.</p>
+      <button class="nw-card__more" type="button">더보기</button>
+    </li>
+
+  </ul>
+  </div>
+
+  <!-- ---- EDITORIAL ----------------------------------------------------- -->
+  <div id="panel-editorial" role="tabpanel" aria-labelledby="tab-editorial" tabindex="0" hidden>
+    <div class="nw-ed">
+
+      <div class="nw-ed__col nw-ed__col--wide">
+        <article class="nw-card nw-card--ed">
+          <figure class="nw-card__shot nw-card__shot--wide">
+            <img src="assets/img/clubzineanthology.png" alt="진과 레코드, 프린트 티셔츠와 에코백이 벽과 테이블에 진열된 클럽 모음집 전시" width="1448" height="1086" loading="lazy">
+          </figure>
+          <h2 class="nw-card__title">2025 CLUB ZINE ANTHOLOGY</h2>
+          <p class="nw-card__desc">클럽의 비전과 룰, 문화에 관한 정보와 클럽 멤버의 창작 활동에 대한 정보가 있는 매거진입니다. 지난 2025년 클럽 멤버들이 제작한 진을 엮어 아카이빙했습니다.</p>
+        </article>
+
+        <article class="nw-card nw-card--ed">
+          <figure class="nw-card__shot nw-card__shot--wide">
+            <img src="assets/img/theroomsthatneverclosed.png" alt="공유 음악 폴더가 열린 오래된 모니터와 손글씨 CD, 헤드폰이 놓인 밤의 작업 책상" width="1448" height="1086" loading="lazy">
+          </figure>
+          <h2 class="nw-card__title">THE ROOMS THAT NEVER CLOSED</h2>
+          <p class="nw-card__desc">Soulseek의 개인 라이브러리와 파일 공유 문화를 따라가며, 사람의 폴더를 통해 새로운 음악을 발견하던 방식을 기록했습니다. 스트리밍 이전과 이후에도 남아 있는 비공식 음악 유통과 취향의 연결을 살펴봅니다.</p>
+        </article>
+
+        <article class="nw-card nw-card--ed">
+          <figure class="nw-card__shot nw-card__shot--wide">
+            <img src="assets/img/orderfromculutre.png" alt="팬진 더미와 우표 붙은 봉투, P.O. Box 주소와 주문서가 펼쳐진 책상" width="1448" height="1086" loading="lazy">
+          </figure>
+          <h2 class="nw-card__title">ORDER FORM CULTURE</h2>
+          <p class="nw-card__desc">우편 주문서와 P.O. Box, 복사한 카탈로그를 통해 오가던 팬진의 유통 방식을 정리했습니다. 온라인 이전 작은 출판물들이 봉투와 인서트를 통해 독자와 장면을 연결하던 문화를 기록했습니다.</p>
+        </article>
+      </div>
+
+      <div class="nw-ed__col nw-ed__col--narrow">
+        <article class="nw-card nw-card--ed">
+          <figure class="nw-card__shot nw-card__shot--tall">
+            <img src="assets/img/splicingroomwarp.png" alt="붉은 네온 아래 테이블에 사진과 인쇄물을 펼쳐놓고 이야기하는 멤버들" width="1122" height="1402" loading="lazy">
+          </figure>
+          <h2 class="nw-card__title">SPLICING ROOM WRAP-UP</h2>
+          <p class="nw-card__desc">각자의 수집한 영상 파편들을 하나의 맥락으로 접합했던 오프라인 조립 워크숍의 결과물입니다.</p>
+        </article>
+
+        <article class="nw-card nw-card--ed">
+          <figure class="nw-card__shot nw-card__shot--tall nw-card__shot--left">
+            <img src="assets/img/lowsignalhighstrangeress.png" alt="PUBLIC ACCESS 네온사인 아래 브라운관 TV 여러 대와 카메라가 놓인 퍼블릭 액세스 방송 스튜디오" width="1448" height="1086" loading="lazy">
+          </figure>
+          <h2 class="nw-card__title">LOW SIGNAL, HIGH STRANGENESS</h2>
+          <p class="nw-card__desc">미국 퍼블릭 액세스 TV에 남은 저예산 방송과 지역 기반의 독특한 프로그램들을 모아 살펴봤습니다. 완성도보다 참여와 개성이 앞섰던 DIY 방송 문화와 그 화면의 미학을 기록했습니다.</p>
+        </article>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- ==================================================================== -->
+<!-- FOOTER — same as the home page                                       -->
+<!-- ==================================================================== -->
+<footer class="site-footer">
+  <div class="site-footer__grid wrapper">
+    <p class="site-footer__col">
+      THE CLUB UNDERCRAFT 2026.<br>
+      SOLIDARITY FOR DENSE CULUTRE<br>
+      A POST-SUBCULTURE SOCIAL CLUB.
+    </p>
+    <p class="site-footer__col">
+      SEOUL, SOUTH KOREA<br>
+      ONLINE / OFFLINE<br>
+      EST. 2026
+    </p>
+    <ul class="site-footer__col" role="list">
+      <li><a href="#">ACCESSIBILITY</a></li>
+      <li><a href="#">COMMUNITY GUIDELINES</a></li>
+      <li><a href="#">PRIVACY POLICY</a></li>
+      <li><a href="#">TERMS OF USE</a></li>
+    </ul>
+    <ul class="site-footer__col" role="list">
+      <li><a class="is-underlined" href="mailto:hello@theclubundercraft.com">@THECLUBUNDERCRAFT.COM</a></li>
+      <li><a href="#">INSTAGRAM</a></li>
+      <li><a href="#">ARE.NA</a></li>
+    </ul>
+    <p class="site-footer__col site-footer__col--credit">DESIGN BY TCU</p>
+  </div>
+  <p class="site-footer__cookie wrapper">WE USE COOKIES. SEE OUR COOKIE POLICY.</p>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+/* =========================================================
+   DESIGN TOKENS
+   Fluid type + space generated with the Utopia method
+   utopia.fyi — viewports 320 → 1240
+   type   : 16px / 1.2  →  24px / 1.25   (본문 24pt)
+   space  : 16px        →  20px
+   ========================================================= */
+
+:root {
+  /* ---- Fluid type scale ---------------------------------- */
+  --step--2: clamp(0.6944rem, 0.6020rem + 0.4620vw, 0.9600rem);
+  --step--1: clamp(0.8331rem, 0.7055rem + 0.6380vw, 1.2000rem);
+  --step-0:  clamp(1.0000rem, 0.8261rem + 0.8696vw, 1.5000rem);
+  --step-1:  clamp(1.2000rem, 0.9652rem + 1.1739vw, 1.8750rem);
+  --step-2:  clamp(1.4400rem, 1.1257rem + 1.5717vw, 2.3438rem);
+  --step-3:  clamp(1.7281rem, 1.3101rem + 2.0902vw, 2.9297rem);
+  --step-4:  clamp(2.0736rem, 1.5214rem + 2.7620vw, 3.6621rem);
+  --step-5:  clamp(2.4883rem, 1.7614rem + 3.6337vw, 4.5776rem);
+
+  /* Poster / display sizes — deliberately viewport driven */
+  --display-xl: clamp(3.5rem, 12.5vw, 12.5rem);
+  --display-l:  clamp(2.75rem, 9.4vw, 9.5rem);
+  --display-m:  clamp(2rem, 5.6vw, 5.5rem);
+
+  /* ---- Fluid space scale --------------------------------- */
+  --space-3xs: clamp(0.2500rem, 0.2283rem + 0.1087vw, 0.3125rem);
+  --space-2xs: clamp(0.5000rem, 0.4565rem + 0.2174vw, 0.6250rem);
+  --space-xs:  clamp(0.7500rem, 0.6848rem + 0.3261vw, 0.9375rem);
+  --space-s:   clamp(1.0000rem, 0.9130rem + 0.4348vw, 1.2500rem);
+  --space-m:   clamp(1.5000rem, 1.3696rem + 0.6522vw, 1.8750rem);
+  --space-l:   clamp(2.0000rem, 1.8261rem + 0.8696vw, 2.5000rem);
+  --space-xl:  clamp(3.0000rem, 2.7391rem + 1.3043vw, 3.7500rem);
+  --space-2xl: clamp(4.0000rem, 3.6522rem + 1.7391vw, 5.0000rem);
+  --space-3xl: clamp(6.0000rem, 5.4783rem + 2.6087vw, 7.5000rem);
+  /* one-off pair */
+  --space-s-l: clamp(1.0000rem, 0.4783rem + 2.6087vw, 2.5000rem);
+
+  /* ---- Colour -------------------------------------------- */
+  --clr-ink:    #000000;
+  --clr-paper:  #ffffff;
+  --clr-red:    #e5322a;
+  --clr-dim:    rgba(255, 255, 255, 0.62);
+  --clr-line:   rgba(255, 255, 255, 0.35);
+
+  /* ---- Type families ------------------------------------- */
+  --font-display: "Antonio", "Oswald", "Arial Narrow", sans-serif;
+  --font-body: "Helvetica Neue LT Pro", "HelveticaNeueLTPro",
+               "Helvetica Neue", "Pretendard Variable", Pretendard,
+               -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  --font-kr: "Pretendard Variable", Pretendard, "Helvetica Neue LT Pro",
+             -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+             "Malgun Gothic", sans-serif;
+
+  /* ---- Measure / rhythm ---------------------------------- */
+  --measure: 62ch;
+  --gutter: var(--space-s-l);
+  --wrapper-max: 90rem;        /* 1440px */
+  --stage-max: 2200px;         /* the poster stops growing here */
+  --page-scale: 0.8235;        /* sub-pages: body 34 → 28, everything else follows */
+  --border-thin: 1px;
+  --border-thick: 2px;
+}
+
+/* Font faces ------------------------------------------------
+   Helvetica Neue LT Pro is a licensed typeface and is not
+   redistributed here. Drop the licensed web-font files into
+   /assets/fonts/ and these rules pick them up automatically;
+   until then the stack falls back to Helvetica Neue / Arial.
+   ----------------------------------------------------------- */
+@font-face {
+  font-family: "Helvetica Neue LT Pro";
+  src: url("../assets/fonts/HelveticaNeueLTPro-Roman.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue LT Pro";
+  src: url("../assets/fonts/HelveticaNeueLTPro-Md.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Neue LT Pro";
+  src: url("../assets/fonts/HelveticaNeueLTPro-Bd.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

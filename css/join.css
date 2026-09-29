@@ -1,0 +1,273 @@
+/* =========================================================
+   JOIN / MEMBERSHIP PAGE
+   Artboard 1440 wide, read from design/join. Sizes are cqw
+   against the page shell, so the whole layout scales.
+   ========================================================= */
+
+.page-join {
+  background-color: #0E0D0D;
+}
+
+/* ---------------------------------------------------------
+   HEADER — a plain bar with a rule under it, not the
+   transparent one that floats over the home page hero.
+   --------------------------------------------------------- */
+.jp-header {
+  inline-size: 100%;
+  container-type: inline-size;
+}
+/* identical to .site-header__inner — same width, same margins, same height */
+.jp-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  inline-size: min(100% - (var(--gutter) * 2), var(--wrapper-max));
+  margin-inline: auto;
+  padding-block: var(--space-xs);
+}
+/* the bar matches the home page one exactly — same logo, same lettering */
+.jp-brand { display: block; }
+.jp-brand img { inline-size: clamp(7.5rem, 11vw, 10.5rem); block-size: auto; }
+
+.jp-nav .site-nav__list {
+  display: flex;
+  gap: clamp(1rem, 2.2vw, 2rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.jp-nav a {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2.2vw, 2rem);
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--clr-paper);
+}
+
+/* ---------------------------------------------------------
+   PAGE SHELL
+   --------------------------------------------------------- */
+/* Every size on the sub-pages is cqw against this shell, so narrowing it
+   shrinks type, boxes, photos and gaps together and widens the side margins.
+   body.page-join main outranks .jp / .ab / .nw in their own files. */
+@media (min-width: 48em) {
+  body.page-join main {
+    inline-size: calc(min(100%, var(--stage-max)) * var(--page-scale));
+  }
+}
+.jp {
+  inline-size: min(100%, var(--stage-max));
+  margin-inline: auto;
+  container-type: inline-size;
+  padding-block-end: 0;
+}
+
+/* title row: the plate and the outlined link share a baseline */
+.jp__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-m);
+  margin-inline: 8.75%;
+  margin-block-start: 4.03cqw;
+}
+.jp-title {
+  margin: 0;
+  padding: 0.11em 0.13em 0.27em;
+  background-color: var(--clr-paper);
+  color: var(--clr-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 8.99cqw;
+  line-height: 0.78;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.jp-cta {
+  display: grid;
+  place-items: center;
+  inline-size: 23.61cqw;
+  block-size: 4.03cqw;
+  padding-block-end: 0.16em;
+  border: var(--border-thin) solid var(--clr-paper);
+  color: var(--clr-paper);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.57cqw;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;   /* it's a button now — opens the form */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.jp-cta:hover,
+.jp-cta:focus-visible {
+  background-color: var(--clr-red);
+  border-color: var(--clr-red);
+}
+
+/* ---------------------------------------------------------
+   RED SECTION LABEL + WHITE PANEL — the two are attached
+   --------------------------------------------------------- */
+.jp-label {
+  inline-size: max-content;
+  max-inline-size: 83.125%;
+  margin: 4.17cqw 8.75% 0;
+  padding: 0.2em 0.28em 0.34em;
+  background-color: #DA2E34;
+  color: var(--clr-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 4.49cqw;
+  line-height: 0.78;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.jp-panel {
+  inline-size: 83.125%;
+  margin-inline: 8.75%;
+  padding: 2.19cqw 1.17cqw;
+  background-color: #FAFAFA;
+  color: var(--clr-ink);
+  font-family: var(--font-kr);
+  font-weight: 600;
+  font-size: 1.89cqw;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+.jp-panel p { margin: 0; }
+.jp-panel p + p { margin-block-start: 1.5em; }
+
+.jp-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.jp-steps > li + li { margin-block-start: 2.22cqw; }
+
+.jp-step__title {
+  margin: 0 0 0.45em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.2cqw;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------
+   CLOSING PLATE — outlined, rules bleed to the screen edges
+   --------------------------------------------------------- */
+.jp-join {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 15.28cqw;
+  padding-block-end: 0.2em;     /* even space above and below the lettering */
+  position: relative;
+  z-index: 0;
+  margin-block-start: 3.68cqw;
+  padding-inline: 0;
+  border: 0;
+  background-color: transparent;   /* it's a button now — opens the form */
+  cursor: pointer;
+  color: var(--clr-paper);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12.62cqw;
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+/* the rules and the hover fill run to the screen edges, past the shell */
+.jp-join::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline: calc(50% - 50vw);
+  z-index: -1;
+  border-block: var(--border-thin) solid var(--clr-paper);
+  transition: background-color 0.3s ease;
+}
+.jp-join:hover::before,
+.jp-join:focus-visible::before {
+  background-color: var(--clr-red);
+}
+
+/* =========================================================
+   NARROW — the artboard proportions stop being readable, so
+   the page falls back to a plain stack.
+   ========================================================= */
+@media (max-width: 47.99em) {
+  /* the bar hands over to the home page's own narrow behaviour:
+     hamburger + full screen overlay, so nothing is overridden here */
+  .jp-header__inner { padding-block: var(--space-m) var(--space-s); }
+
+  .jp__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-s);
+    margin-inline: 6%;
+    margin-block-start: var(--space-xl);
+  }
+  .jp-title { font-size: 13cqw; }
+  .jp-cta { inline-size: auto; block-size: auto; font-size: 4.4cqw; padding: 0.4em 0.5em 0.46em; }
+
+  .jp-label {
+    margin: var(--space-xl) 6% 0;
+    font-size: 7cqw;
+  }
+  .jp-panel {
+    inline-size: 88%;
+    margin-inline: 6%;
+    padding: 4% 4.5% 4.6%;
+    font-size: 3.7cqw;
+  }
+  .jp-step__title { font-size: 4.3cqw; }
+  .jp-steps > li + li { margin-block-start: 5%; }
+
+  .jp-join {
+    block-size: auto;
+    padding-block: 0.24em;
+    margin-block-start: var(--space-xl);
+    font-size: 15cqw;
+  }
+}
+
+/* the JOIN page nav uses the same cocked red plate on hover */
+.jp-nav a {
+  position: relative;
+  z-index: 0;
+}
+.jp-nav a::before {
+  content: "";
+  position: absolute;
+  inset: -0.16em -0.28em -0.2em;
+  z-index: -1;
+  background-color: var(--clr-red);
+  rotate: -1.5deg;
+  opacity: 0;
+  transition: opacity 0.24s ease;
+}
+.jp-nav a:hover,
+.jp-nav a:focus-visible { color: var(--clr-paper); }
+.jp-nav a:hover::before,
+.jp-nav a:focus-visible::before { opacity: 1; }
+.jp-nav a[href*="news"]::before { rotate: 1.5deg; }
+.jp-nav a[aria-current="page"] { color: var(--clr-paper); }
+.jp-nav a[aria-current="page"]::before { opacity: 1; }
+
+/* footer — same block as the home page; it takes this page's background
+   so it doesn't show up as a darker band under the #0E0D0D body */
+.page-join .site-footer { background-color: transparent; }

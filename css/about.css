@@ -1,0 +1,201 @@
+/* =========================================================
+   ABOUT PAGE
+   Artboard 1440 wide, read from design/about. The masthead
+   overlaps photos, plates and panels, so it is an absolutely
+   placed stage; the rule section below it is plain flow.
+   ========================================================= */
+
+.ab {
+  inline-size: min(100%, var(--stage-max));
+  margin-inline: auto;
+  container-type: inline-size;
+}
+
+/* ---------------------------------------------------------
+   MASTHEAD STAGE — artboard y 190 → 1240
+   JOIN and NEWS measure from the header rule at y 172, so the stage
+   drops by the 18 between them and ABOUT lines up with both.
+   --------------------------------------------------------- */
+.ab-stage {
+  position: relative;
+  margin-block-start: 1.25cqw;  /* 18 */
+  aspect-ratio: 1440 / 1150;
+  overflow-x: visible;   /* the photo and box run out to the screen edge */
+  overflow-y: clip;      /* …but the artboard still cuts them top and bottom */
+}
+.ab-stage > * {
+  position: absolute;
+  margin: 0;
+}
+
+/* photographs sit under everything */
+.ab-shot { overflow: hidden; }
+.ab-shot img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.2) brightness(0.96);
+}
+.ab-shot--right {
+  inset-inline-start: 55.56%;   /* 800  */
+  inset-block-start: 11.22%;    /* 319  */
+  inline-size: 32.71%;          /* 471  */
+  block-size: 43.68cqw;         /* 629  */
+}
+.ab-shot--right img { object-position: 52% 50%; }
+.ab-shot--left {
+  /* left edge: the artboard's -68, or the screen edge once margins open up;
+     the right edge stays put at 397 (27.57%) */
+  inset-inline-start: min(-4.72%, 50% - 50vw);
+  inset-block-start: 42.35%;    /* 677  */
+  inline-size: calc(27.57% - min(-4.72%, 50% - 50vw));
+  block-size: 22.36cqw;         /* 322  */
+}
+.ab-shot--left img { object-position: 52% 50%; }
+
+/* ABOUT plate */
+.ab-title {
+  inset-inline-start: 8.75%;    /* 126 */
+  inset-block-start: 3.48%;     /* 230 */
+  padding: 0.11em 0.13em 0.27em;
+  background-color: var(--clr-paper);
+  color: var(--clr-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 8.99cqw;
+  line-height: 0.78;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  z-index: 3;
+}
+
+/* the three outlined headline plates */
+.ab-plate {
+  display: flex;
+  align-items: center;
+  inline-size: max-content;
+  block-size: 8.96cqw;          /* 129 — the three meet edge to edge */
+  padding: 0 0.1em 0.09em;
+  border: 0.35cqw solid var(--clr-paper);   /* artboard stroke-width 5 */
+  background-color: #0E0D0D;
+  color: var(--clr-paper);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 7.24cqw;
+  line-height: 0.78;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 3;
+}
+.ab-plate--1 { inset-inline-start: 8.92%; inset-block-start: 21.09%; }  /* 128.5 / 432.5 */
+.ab-plate--2 { inset-inline-start: 8.92%; inset-block-start: 31.87%; }  /* 556.5 — borders coincide */
+.ab-plate--3 { inset-inline-start: 8.92%; inset-block-start: 42.65%; }  /* 680.5 */
+
+.ab-caption {
+  inset-inline-start: 33.74%;   /* 485.9 */
+  inset-block-start: 45.77%;    /* 716.3 */
+  inline-size: 15.8%;           /* 227 */
+  color: var(--clr-paper);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.04cqw;
+  line-height: 1.28;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  z-index: 3;
+}
+
+/* OUR MISSION label — anchored by its right edge so it always flushes
+   with the Korean panel below (both end at 1314), whatever its width */
+.ab-mission__label {
+  inset-inline-end: 8.75%;      /* 1440 - 1314 */
+  inset-block-start: 55.04%;    /* 823 */
+  margin: 0;
+  z-index: 4;
+}
+
+/* the English statement — outlined, and it runs off the page edge */
+.ab-mission__en {
+  inset-inline-start: 39.27%;   /* 565.5 */
+  inset-block-start: 67.17%;    /* 962.5 */
+  inline-size: 77.71%;          /* 1119 */
+  padding: 1.18cqw 0.97cqw;
+  border: 0.35cqw solid var(--clr-paper);
+  color: var(--clr-paper);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 2.07cqw;
+  line-height: 1.5;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+/* the Korean statement sits over it */
+.ab-mission__kr {
+  inset-inline-start: 18.4%;    /* 265 */
+  inset-block-start: 62.43%;    /* 908 — meets the label */
+  inline-size: 72.85%;          /* 1049 */
+  margin: 0;
+  font-size: 2.08cqw;
+  z-index: 3;
+}
+
+/* ---------------------------------------------------------
+   CLUB RULE — plain flow, same panels as the join page
+   --------------------------------------------------------- */
+.ab-rule__label { margin-block-start: 4.17cqw; }
+.ab-panel { margin-block-start: 1.53cqw; }
+.ab-rule__label + .ab-panel { margin-block-start: 0; }
+.ab .ab-panel:last-of-type { margin-block-end: 5cqw; }
+
+/* =========================================================
+   NARROW — the overlap stops working, so it all stacks
+   ========================================================= */
+@media (max-width: 47.99em) {
+  .ab-stage {
+    position: static;
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-s);
+    margin-block-start: 0;
+    padding-block-start: var(--space-xl);
+  }
+  .ab-stage > * { position: static; }
+
+  .ab-title { font-size: 13cqw; }
+
+  .ab-shot {
+    order: 1;
+    inline-size: 94%;
+    block-size: auto;
+    margin-inline-start: -6%;
+    aspect-ratio: 3 / 2;
+  }
+  .ab-shot--left { order: 4; margin-inline-start: 0; inline-size: 100%; }
+
+  .ab-plate {
+    order: 2;
+    block-size: auto;
+    padding: 0.1em 0.14em 0.22em;
+    font-size: 8cqw;
+  }
+  .ab-caption { order: 3; inline-size: 100%; font-size: 3.2cqw; margin-block-start: var(--space-2xs); }
+
+  .ab-mission__label { order: 5; margin-block-start: var(--space-l); }
+  .ab-mission__kr { order: 6; inline-size: 100%; }
+  .ab-mission__en {
+    order: 7;
+    inline-size: 100%;
+    font-size: 3.2cqw;
+    padding: 4% 4.5%;
+    margin-block-start: var(--space-s);
+  }
+
+  .ab-rule__label { margin-block-start: var(--space-xl); }
+  .ab-panel { margin-block-start: 5%; }
+  .ab .ab-panel:last-of-type { margin-block-end: var(--space-2xl); }
+}

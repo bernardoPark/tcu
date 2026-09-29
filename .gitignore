@@ -1,0 +1,16 @@
+# Figma exports and reference captures — working files, not part of the site.
+# They are large (the benefits SVG alone is 36MB) and nothing links to them.
+design/
+
+# Earlier cuts of the hero video. Only assets/video/promo4.mp4 is used.
+assets/video/promo2.mp4
+assets/video/promo3.mp4
+
+# Local tooling
+.claude/
+node_modules/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini

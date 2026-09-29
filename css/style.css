@@ -1,0 +1,1000 @@
+/* =========================================================
+   THE CLUB UNDERCRAFT — site styles
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1. GLOBALS
+   --------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--clr-ink);
+}
+
+body {
+  background-color: var(--clr-ink);
+  color: var(--clr-paper);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  font-weight: 400;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+:lang(ko),
+[lang="ko"] { font-family: var(--font-kr); }
+
+::selection {
+  background-color: var(--clr-red);
+  color: var(--clr-paper);
+}
+
+:focus-visible {
+  outline: var(--border-thick) solid var(--clr-red);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  inset-block-start: var(--space-xs);
+  inset-inline-start: var(--space-xs);
+  z-index: 999;
+  padding: var(--space-2xs) var(--space-s);
+  background-color: var(--clr-paper);
+  color: var(--clr-ink);
+  font-family: var(--font-kr);
+  font-size: var(--step--1);
+  translate: 0 -200%;
+}
+.skip-link:focus { translate: 0 0; }
+
+/* Film grain -----------------------------------------------
+   A pre-rendered 128×128 noise tile. Cheap to composite, and
+   it keeps the photography sitting in the same dust as the
+   print pieces in the artwork.
+   ----------------------------------------------------------- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("../assets/img/grain.png");
+  background-repeat: repeat;
+}
+
+/* Shared photo treatment ---------------------------------- */
+.is-mono img,
+.duo__cell--mono img,
+.bleed-media img,
+.intro__shot img {
+  filter: grayscale(1) contrast(1.28) brightness(0.94);
+}
+
+/* ---------------------------------------------------------
+   2. TYPOGRAPHIC ATOMS
+   --------------------------------------------------------- */
+
+/* A white "tape" block of condensed display type */
+.tape {
+  display: inline-block;
+  padding: 0.07em 0.11em 0.22em;
+  background-color: var(--clr-paper);
+  color: var(--clr-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--display-l);
+  line-height: 0.78;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Red sticker label */
+.tag {
+  display: inline-block;
+  padding: 0.12em 0.34em 0.18em;
+  background-color: var(--clr-red);
+  color: var(--clr-paper);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-2);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Bordered callout */
+.callout {
+  border: var(--border-thin) solid var(--clr-paper);
+  background-color: var(--clr-ink);
+  padding: var(--space-2xs) var(--space-xs);
+  line-height: 1.24;
+}
+.callout--en {
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+.callout--kr {
+  font-family: var(--font-kr);
+  font-size: var(--step-0);
+  font-weight: 500;
+  word-break: keep-all;
+}
+
+/* Small all-caps marginalia */
+.micro,
+.scrawl,
+.perk__en {
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  line-height: 1.28;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--clr-paper);
+}
+.scrawl { white-space: nowrap; font-weight: 600; }
+
+.perk__kr {
+  font-family: var(--font-kr);
+  font-size: var(--step--1);
+  font-weight: 600;
+  line-height: 1.3;
+  word-break: keep-all;
+  background-color: var(--clr-paper);
+  color: var(--clr-ink);
+  padding: 0.24em 0.5em 0.3em;
+}
+
+.prose {
+  line-height: 1.5;
+  font-weight: 500;
+  max-inline-size: var(--measure);
+}
+.prose--kr {
+  font-family: var(--font-kr);
+  word-break: keep-all;
+}
+.prose--en {
+  font-size: var(--step--1);
+  letter-spacing: 0.015em;
+  line-height: 1.32;
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------
+   3. HEADER + NAV
+   --------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 500;
+  transition: background-color 0.4s ease;
+}
+.site-header.is-stuck {
+  background-color: rgba(0, 0, 0, 0.86);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  inline-size: min(100% - (var(--gutter) * 2), var(--wrapper-max));
+  margin-inline: auto;
+  padding-block: var(--space-xs);
+}
+
+.brand img {
+  inline-size: clamp(7.5rem, 11vw, 10.5rem);
+  block-size: auto;
+}
+
+.site-nav__list {
+  display: flex;
+  gap: clamp(1rem, 2.2vw, 2rem);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.site-nav a {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2.2vw, 2rem);
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--clr-paper);
+  position: relative;
+  z-index: 0;   /* keeps the hover plate inside this element, not behind the bar */
+}
+.site-nav a::before {
+  content: "";
+  position: absolute;
+  inset: -0.16em -0.28em -0.2em;
+  z-index: -1;
+  background-color: var(--clr-red);
+  rotate: -1.5deg;
+  opacity: 0;
+  transition: opacity 0.24s ease;
+}
+.site-nav a:hover::before,
+.site-nav a:focus-visible::before { opacity: 1; }
+/* one of the three leans the other way */
+.site-nav a[href*="news"]::before { rotate: 1.5deg; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  inline-size: 44px;
+  block-size: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.nav-toggle__bar {
+  display: block;
+  block-size: 2px;
+  inline-size: 100%;
+  background-color: var(--clr-paper);
+  transition: translate 0.3s ease, rotate 0.3s ease, opacity 0.2s ease;
+}
+
+@media (max-width: 47.99em) {
+  .nav-toggle { display: flex; }
+
+  .site-nav {
+    position: fixed;
+    inset: 0;
+    background-color: var(--clr-ink);
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+  .site-nav.is-open { opacity: 1; visibility: visible; }
+  .site-nav__list { flex-direction: column; gap: var(--space-m); text-align: center; }
+  .site-nav a { font-size: var(--display-m); }
+
+  .nav-toggle[aria-expanded="true"] { position: relative; z-index: 600; }
+  .nav-toggle[aria-expanded="true"] .nav-toggle__bar:first-child { translate: 0 4px; rotate: 45deg; }
+  .nav-toggle[aria-expanded="true"] .nav-toggle__bar:last-child  { translate: 0 -4px; rotate: -45deg; }
+}
+
+/* ---------------------------------------------------------
+   4. HERO
+   --------------------------------------------------------- */
+.hero {
+  position: relative;
+  block-size: 100svh;
+  min-block-size: 32rem;
+  overflow: hidden;
+  background-color: #050505;
+}
+.hero__media {
+  position: absolute;
+  inset: 0;
+}
+.hero__media img,
+.hero__media video {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: 50% 46%;
+  filter: grayscale(1) contrast(1.15) brightness(0.98);
+  scale: 1.06;
+  will-change: transform;
+  background-color: #050505;
+}
+/* the video is already graded — show it as delivered, red boxes included.
+   The black-and-white treatment above is only for a still photo. */
+.hero__media video { filter: none; }
+.hero__cue {
+  position: absolute;
+  inset-block-end: var(--space-m);
+  inset-inline-start: 50%;
+  translate: -50% 0;
+  rotate: -2deg;                 /* the plate sits slightly cocked, like the tapes */
+  padding: 0.42em 0.7em 0.5em;
+  background-color: var(--clr-paper);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step--1);
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-indent: 0.18em;
+  color: var(--clr-ink);
+  animation: cue 2.4s ease-in-out infinite;
+}
+@keyframes cue {
+  0%, 100% { opacity: 0.72; translate: -50% 0; }
+  50%      { opacity: 1;    translate: -50% 6px; }
+}
+
+/* ---------------------------------------------------------
+   5. INTRO — POST SUBCULTURE SOCIAL CLUB
+
+   Two compositions, one poster.
+     < 48em : portrait collage — the tapes keep their tilt and
+              their overlap, the photos bleed past the gutter.
+     >=48em : the Figma artboard (1920 wide) reproduced 1:1 and
+              scaled by pure proportion. Every position is a %
+              of the stage, every size a cqw, so the poster only
+              ever gets smaller — it never re-flows.
+   --------------------------------------------------------- */
+.intro {
+  padding-block: var(--space-2xl);
+  overflow: clip;
+}
+
+/* the measuring stick shared by both compositions */
+.intro__inner {
+  inline-size: min(100%, var(--stage-max));
+  margin-inline: auto;
+  container-type: inline-size;
+}
+
+.intro__collage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-inline: 6%;
+}
+
+.intro__title { display: contents; }
+
+.intro__collage .tape {
+  position: relative;
+  font-size: 13cqw;
+}
+.tape--a { z-index: 2; rotate: 5deg;    margin-inline-start: 0; }
+.tape--b { z-index: 3; rotate: -4.5deg; margin-inline-start: 15%; margin-block-start: -0.02em; }
+.tape--c { z-index: 2; rotate: -7.5deg; margin-inline-start: 1%;  margin-block-start: 0.06em; }
+.tape--d { z-index: 3; rotate: -3deg;   margin-inline-start: 33%; margin-block-start: -0.08em; }
+
+.intro__shot img { inline-size: 100%; block-size: auto; }
+
+.intro__shot--handoff {
+  align-self: flex-end;
+  inline-size: 66%;
+  margin-inline-end: -6%;
+  margin-block-start: 4%;
+  rotate: 1.2deg;
+}
+.intro__collage .callout--en {
+  inline-size: 92%;
+  margin-block-start: 5%;
+  rotate: -0.9deg;
+  font-size: 3.6cqw;
+  padding: 0.62em 0.72em 0.66em;
+}
+.intro__collage .callout--kr {
+  align-self: flex-end;
+  inline-size: 92%;
+  margin-inline-end: -4%;
+  margin-block-start: -1%;
+  rotate: 0.7deg;
+  font-size: 4.15cqw;
+  padding: 0.62em 0.72em 0.66em;
+}
+.intro__shot--table {
+  inline-size: 88%;
+  margin-inline-start: -6%;
+  margin-block-start: 6%;
+  rotate: -1deg;
+}
+.intro__wordmark {
+  align-self: flex-end;
+  margin-block-start: 5%;
+  rotate: -1deg;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 8.6cqw;
+  line-height: 0.84;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+
+.intro__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
+  margin-block-start: var(--space-xl);
+  padding-inline: 6%;
+}
+.intro__body .intro__shot--papers { rotate: 0.8deg; }
+
+/* ---------------------------------------------------------
+   6. BENEFITS
+
+   Same two-composition rule as the intro: a portrait collage
+   that keeps its tilt below 60em, the 1440 artboard scaled by
+   pure proportion above it.
+   --------------------------------------------------------- */
+.benefits {
+  padding-block: var(--space-3xl);
+  overflow: clip;
+}
+
+.benefits__head {
+  inline-size: min(100%, var(--stage-max));
+  margin-inline: auto;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-inline: 6%;
+}
+
+.benefits__head .tape {
+  position: relative;
+  font-size: 11.5cqw;
+  /* the artboard gives these tapes a much wider margin of paper
+     than the intro ones — box runs 1.45em tall, 0.55em each side */
+  padding: 0.14em 0.14em 0.29em;
+}
+.tape--m1  { z-index: 2; rotate: -6deg;  margin-inline-start: 0; }
+.tape--m1b { z-index: 4; rotate: 4deg;   margin-inline-start: 58%; margin-block-start: -1.3em; }
+.tape--m2 { z-index: 3; rotate: 3.5deg;  margin-inline-start: 19%; margin-block-start: -0.02em; }
+.tape--m3 { z-index: 2; rotate: -4.5deg; margin-inline-start: 5%;  margin-block-start: 0.04em; }
+
+.benefits__head .scrawl--bring {
+  align-self: flex-end;
+  rotate: -7deg;
+  margin-block-start: 9%;
+  margin-inline-end: 4%;
+}
+.benefits__head .micro--left  { margin-block-start: 8%; }
+.benefits__head .micro--right { margin-block-start: 5%; }
+.benefits__head .benefits__kr {
+  align-self: flex-end;
+  inline-size: 78%;
+  margin-block-start: 7%;
+  margin-inline-end: -4%;
+  rotate: 1deg;
+  font-size: 3.8cqw;
+  padding: 0.62em 0.72em 0.66em;
+}
+
+.benefits__collage {
+  inline-size: min(100%, var(--stage-max));
+  margin-inline: auto;
+  container-type: inline-size;
+  margin-block-start: var(--space-2xl);
+  padding-inline: 6%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.perk {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+}
+.perk__shot { inline-size: min(100%, 22rem); }
+.perk__shot img { inline-size: 100%; block-size: auto; }
+
+/* the alternating tilt is the portrait composition only — nth-of-type
+   outranks the artboard rules, so it is fenced off by width */
+@media (max-width: 59.99em) {
+  /* the artboard's hard line breaks make ragged orphans in a narrow column */
+  .micro br { display: none; }
+
+  .benefits__collage .perk:nth-of-type(odd)  { rotate: -2.5deg; margin-inline-start: -3%; }
+  .benefits__collage .perk:nth-of-type(even) { rotate: 2deg;    margin-inline-start: 7%;  }
+  .benefits__collage .perk:nth-of-type(odd) .perk__shot  { rotate: -3deg; }
+  .benefits__collage .perk:nth-of-type(even) .perk__shot { rotate: 3deg;  }
+}
+
+.benefits__collage .scrawl {
+  align-self: flex-end;
+  rotate: -8deg;
+  margin-inline-end: 6%;
+}
+
+.paper { display: none; }
+
+/* ---------------------------------------------------------
+   7. JOIN BANNER — an outlined box on the artboard, not a marquee
+   --------------------------------------------------------- */
+.join {
+  inline-size: min(100%, var(--stage-max));
+  margin-inline: auto;
+  container-type: inline-size;
+  padding-block: var(--space-3xl);
+  overflow: clip;
+}
+.join__kicker {
+  inline-size: 88%;
+  margin-inline: auto;
+  margin-block-end: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.join__banner {
+  display: grid;
+  place-items: center;
+  inline-size: 100%;
+  padding: 0.22em 0.3em 0.3em;
+  border: var(--border-thick) solid var(--clr-paper);
+  background-color: transparent;
+  color: var(--clr-paper);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 9cqw;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  rotate: -5deg;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.join__banner:hover,
+.join__banner:focus-visible {
+  background-color: var(--clr-red);
+  color: var(--clr-paper);
+  border-color: var(--clr-red);
+}
+
+/* ---------------------------------------------------------
+   8. FULL-BLEED MEDIA
+   --------------------------------------------------------- */
+.bleed-media {
+  position: relative;
+  inline-size: 100%;
+  overflow: hidden;
+  background-color: var(--clr-ink);
+}
+.bleed-media img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+.bleed-media--desk { aspect-ratio: 1440 / 860; }
+.bleed-media--archive { aspect-ratio: 1440 / 900; }
+.bleed-media--archive::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: 38%;
+  background: linear-gradient(to bottom, transparent, var(--clr-ink) 92%);
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------
+   9. STATEMENT
+   --------------------------------------------------------- */
+.statement {
+  inline-size: min(100%, var(--stage-max));
+  margin-inline: auto;
+  container-type: inline-size;
+  padding-block: var(--space-2xl);
+  overflow: clip;
+}
+.statement__box {
+  inline-size: 88%;
+  margin-inline: auto;
+  border: var(--border-thin) solid var(--clr-line);
+  padding: var(--space-s) var(--space-m);
+  font-size: var(--step-1);
+  line-height: 1.32;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------
+   10. DUO
+   --------------------------------------------------------- */
+.duo {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.duo__cell {
+  aspect-ratio: 720 / 400;
+  overflow: hidden;
+}
+.duo__cell img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+@media (min-width: 40em) {
+  .duo { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---------------------------------------------------------
+   11. FOOTER
+   --------------------------------------------------------- */
+.site-footer {
+  padding-block: var(--space-2xl) var(--space-xl);
+  background-color: var(--clr-ink);
+  font-size: clamp(0.625rem, 0.5rem + 0.55vw, 0.8125rem);
+  letter-spacing: 0.04em;
+  line-height: 1.32;
+  text-transform: uppercase;
+}
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: var(--space-m) var(--space-s);
+}
+.site-footer__col { margin: 0; padding: 0; list-style: none; }
+.site-footer__col a {
+  color: var(--clr-paper);
+  text-decoration: none;
+}
+.site-footer__col a:hover,
+.site-footer__col a:focus-visible { color: var(--clr-red); }
+.site-footer__col a.is-underlined { text-decoration: underline; text-underline-offset: 0.22em; }
+.site-footer__col--credit { align-self: start; }
+.site-footer__cookie { margin-block-start: var(--space-l); }
+
+/* ---------------------------------------------------------
+   12. SCROLL REVEAL
+   --------------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  translate: 0 1.2rem;
+  transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+              translate 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal].is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; translate: none; }
+}
+
+/* =========================================================
+   12a. THE INTRO STAGE — Figma artboard 1920 × 900, 1:1
+
+   x is a % of the stage width, y a % of its height, and the
+   stage keeps a fixed aspect-ratio — so one set of numbers
+   holds the composition together at every viewport from
+   768px up. Type is sized in cqw for the same reason.
+   ========================================================= */
+@media (min-width: 48em) {
+
+  .intro { padding-block: var(--space-3xl) var(--space-2xl); }
+
+  .intro__collage {
+    position: relative;
+    display: block;
+    aspect-ratio: 1920 / 900;
+    padding-inline: 0;
+  }
+  .intro__collage > *,
+  .intro__collage .tape,
+  .intro__collage .callout {
+    position: absolute;
+    margin: 0;
+    rotate: none;
+    align-self: auto;
+  }
+  .intro__title { position: static; }
+
+  .intro__collage .tape {
+    font-size: 8.3cqw;
+    letter-spacing: -0.03em;
+  }
+  /* .intro__collage prefix so these outrank the reset above */
+  .intro__collage .tape--a { inset-inline-start: 8.5%;  inset-block-start: 6.2%;  rotate: 5deg;    }
+  .intro__collage .tape--b { inset-inline-start: 24.8%; inset-block-start: 12.6%; rotate: -4.5deg; }
+  .intro__collage .tape--c { inset-inline-start: 8.2%;  inset-block-start: 32.4%; rotate: -7.5deg; }
+  .intro__collage .tape--d { inset-inline-start: 29.6%; inset-block-start: 38.6%; rotate: -3deg;   }
+
+  .intro__shot--handoff {
+    inset-inline-start: 62.9%;
+    inset-block-start: 7.3%;
+    inline-size: 29.1%;
+    rotate: none;
+    z-index: 1;
+  }
+  .intro__shot--handoff img { aspect-ratio: 312 / 262; object-fit: cover; object-position: 50% 50%; }
+
+  .intro__collage .callout--en {
+    margin: 0;
+    inset-inline-start: 48.5%;
+    inset-block-start: 45.3%;
+    inline-size: 30.4%;
+    min-block-size: 7.6cqw;
+    font-size: max(0.6875rem, 1.5cqw);
+    padding: 0.62em 0.72em 0.66em;
+    z-index: 2;
+  }
+  .intro__collage .callout--kr {
+    margin: 0;
+    inset-inline-start: 50.7%;
+    inset-block-start: 61.4%;
+    inline-size: 40.9%;
+    font-size: max(0.9rem, 2.12cqw);
+    padding: 0.62em 0.72em 0.66em;
+  }
+
+  .intro__shot--table {
+    inset-inline-start: 8.4%;
+    inset-block-start: 61.7%;
+    inline-size: 39.1%;
+  }
+  .intro__shot--table img { aspect-ratio: 750 / 313; object-fit: cover; object-position: 50% 50%; }
+
+  .intro__wordmark {
+    inset-inline-start: 50.2%;
+    inset-block-start: 84.5%;
+    font-size: 5.2cqw;
+    letter-spacing: -0.01em;
+    line-height: 0.84;
+  }
+
+  /* ---- the running text below the stage ------------------ */
+  .intro__body {
+    position: relative;
+    display: block;
+    padding-inline: 8.4%;
+    margin-block-start: 1.1cqw;
+    min-block-size: 31cqw;
+  }
+  .intro__body .prose--kr {
+    max-inline-size: 64.3%;
+    font-size: max(0.9375rem, 1.25cqw);
+  }
+  .intro__body .prose--en {
+    max-inline-size: 64.3%;
+    margin-block-start: 1.6cqw;
+    font-size: max(0.8125rem, 1.35cqw);
+  }
+  .intro__body .intro__shot--papers {
+    position: absolute;
+    inset-inline-start: 65.1%;
+    inset-block-start: 0;
+    inline-size: 26.5%;
+    margin: 0;
+    rotate: none;
+  }
+  .intro__body .intro__shot--papers img {
+    aspect-ratio: 509 / 586;
+    object-fit: cover;
+    object-position: 50% 42%;
+  }
+}
+
+/* =========================================================
+   13. THE BENEFITS STAGE — artboard 1440, proportional
+
+   Below 60em the portrait collage above takes over: the perks
+   keep their tilt, they simply stack. Above it the artboard is
+   reproduced 1:1 and only ever scales.
+   ========================================================= */
+@media (min-width: 60em) {
+
+  .benefits { padding-block: var(--space-3xl) 2%; }
+
+  /* ---- the head: tapes, marginalia, the Korean box --------- */
+  .benefits__head {
+    position: relative;
+    display: block;
+    aspect-ratio: 1440 / 560;
+    padding-inline: 0;
+  }
+  .benefits__head > *,
+  .benefits__head .tape,
+  .benefits__head .callout,
+  .benefits__head .micro,
+  .benefits__head .scrawl {
+    position: absolute;
+    margin: 0;
+    rotate: none;
+    align-self: auto;
+    transform-origin: 0 0;
+  }
+  .benefits__head .tape {
+    font-size: 8.03cqw;
+    letter-spacing: -0.03em;
+    padding: 0.14em 0.14em 0.29em;
+  }
+
+  .benefits__head .tape--m1  { inset-inline-start: 8.92%; inset-block-start: 11.43%;   rotate: 1deg;    z-index: 2; }
+  .benefits__head .tape--m1b { inset-inline-start: 47.8%; inset-block-start: 10.77%; rotate: 5.85deg; z-index: 5; }
+  .benefits__head .tape--m3  { inset-inline-start: 61.06%; inset-block-start: 24.82%;   rotate: none;    z-index: 4; }
+  .benefits__head .tape--m2  { inset-inline-start: 34.85%; inset-block-start: 40.27%; rotate: -5deg;   z-index: 3; }
+
+  .benefits__head .scrawl--bring {
+    inset-inline-start: 52.9%;
+    inset-block-start: 19.66%;
+    rotate: -12deg;
+    font-size: 1.45cqw;
+    z-index: 6;
+  }
+  .benefits__head .micro--left {
+    inset-inline-start: 17.85%;
+    inset-block-start: 45%;
+    inline-size: 20.83%;
+    block-size: 9.93cqw;
+    border: var(--border-thin) solid var(--clr-paper);
+    background-color: var(--clr-ink);
+    padding: 0.62em 0.72em 0.66em;
+    font-size: 1.05cqw;
+  }
+  .benefits__head .micro--right {
+    inset-inline-start: 63.6%;
+    inset-block-start: 54.34%;
+    inline-size: max-content;
+    font-size: 1.05cqw;
+  }
+  .benefits__head .benefits__kr {
+    inset-inline-start: 8.82%;
+    inset-block-start: 69.82%;
+    inline-size: 33.26%;
+    block-size: 9.93cqw;
+    font-size: 1.83cqw;
+    font-weight: 600;
+    padding: 0.62em 0.72em 0.66em;
+    z-index: 2;
+  }
+
+  /* ---- the collage: artboard 1440, read straight from the SVG ----
+     SVG rotates about an element's top-left, so every box here
+     carries transform-origin: 0 0 and the numbers transfer 1:1. */
+  .benefits__collage {
+    position: relative;
+    display: block;
+    aspect-ratio: 1440 / 1960;
+    margin-block-start: -19.44%;
+    padding-inline: 0;
+  }
+  .benefits__collage > *,
+  .benefits__collage .scrawl {
+    position: absolute;
+    margin: 0;
+    rotate: none;
+    align-self: auto;
+    transform-origin: 0 0;
+  }
+
+  .perk { display: contents; }
+  .perk__shot { position: absolute; margin: 0; inline-size: auto; }
+  .perk .tag,
+  .perk__kr,
+  .perk__en { position: absolute; margin: 0; transform-origin: 0 0; }
+
+  /* the exports already carry the artboard's rotation */
+  .benefits__collage .perk__shot img { inline-size: 100%; block-size: auto; }
+
+  .benefits__collage .tag      { font-size: 2.9cqw; }
+  .benefits__collage .perk__kr {
+    font-size: 1.513cqw;
+    line-height: 1.45;
+    inline-size: max-content;
+    max-inline-size: 42%;
+  }
+  .benefits__collage .perk__en { font-size: 1.01cqw; inline-size: max-content; }
+
+  /* 1 — CRAFT NOTE */
+  .benefits__collage .perk--note .perk__shot { inset-inline-start: 9.59%; inset-block-start: 16.03%; inline-size: 35.64%; }
+  .benefits__collage .perk--note .tag        { inset-inline-start: 12.39%; inset-block-start: 30.82%; rotate: 0.9deg; z-index: 4; }
+  .benefits__collage .perk--note .perk__kr   { inset-inline-start: 8.6%; inset-block-start: 32.73%; rotate: 8.74deg; z-index: 3; }
+  .benefits__collage .perk--note .perk__en   { inset-inline-start: 17.39%; inset-block-start: 38.81%; rotate: 11.63deg; }
+
+  /* 2 — CLUB ZINE */
+  .benefits__collage .perk--zine .perk__shot { inset-inline-start: 53.65%; inset-block-start: 6.74%; inline-size: 33.46%; }
+  .benefits__collage .perk--zine .tag        { inset-inline-start: 51.63%; inset-block-start: 25.82%; rotate: 5.37deg; z-index: 4; }
+  .benefits__collage .perk--zine .perk__kr   { inset-inline-start: 52.32%; inset-block-start: 29.48%; rotate: -2.48deg; z-index: 3; }
+  .benefits__collage .perk--zine .perk__en   { inset-inline-start: 49.58%; inset-block-start: 33.85%; rotate: 12.27deg; }
+
+  /* 3 — OFFLINE EVENT — copy dropped 90 below the artboard so the poster reads */
+  .benefits__collage .perk--event .perk__shot { inset-inline-start: 59.21%; inset-block-start: 38.90%; inline-size: 31.92%; }
+  .benefits__collage .perk--event .tag        { inset-inline-start: 68.93%; inset-block-start: 58.71%; rotate: -5.71deg; z-index: 4; }
+  .benefits__collage .perk--event .perk__kr   { inset-inline-start: 58.82%; inset-block-start: 65.19%; rotate: -15.68deg; z-index: 3; }
+  .benefits__collage .perk--event .perk__en   { inset-inline-start: 71.51%; inset-block-start: 67.39%; rotate: 3.15deg; }
+
+  /* 4 — CLUB COMMUNITY */
+  .benefits__collage .perk--community .perk__shot { inset-inline-start: 21.53%; inset-block-start: 46.33%; inline-size: 32.24%; }
+  .benefits__collage .perk--community .tag        { inset-inline-start: 19.13%; inset-block-start: 62.6%; rotate: 4.08deg; z-index: 4; }
+  .benefits__collage .perk--community .perk__kr   { inset-inline-start: 15%; inset-block-start: 66.63%; rotate: -1.44deg; z-index: 3; }
+  .benefits__collage .perk--community .perk__en   { inset-inline-start: 57.17%; inset-block-start: 93.03%; rotate: 1.79deg; }
+
+  /* 5 — CLUB CARD — card, tag and caption dropped 60 to clear the event copy */
+  .benefits__collage .perk--card .perk__shot { inset-inline-start: 46.21%; inset-block-start: 71.1%; inline-size: 27.06%; }
+  .benefits__collage .perk--card .tag        { inset-inline-start: 46.18%; inset-block-start: 84.65%; rotate: 13.82deg; z-index: 4; }
+  .benefits__collage .perk--card .perk__kr   { inset-inline-start: 43.56%; inset-block-start: 88.55%; rotate: 2.65deg; z-index: 3; }
+  .benefits__collage .perk--card .perk__en   { inset-inline-start: 17.35%; inset-block-start: 71.98%; rotate: 3.09deg; }
+
+  .benefits__collage .scrawl--share {
+    inset-inline-start: 2.78%;
+    inset-block-start: 55.67%;
+    rotate: -13deg;
+    font-size: 1.45cqw;
+  }
+  .benefits__collage .scrawl--bringwhat {
+    inset-inline-start: 91.51%;
+    inset-block-start: 50.51%;
+    rotate: -55deg;
+    font-size: 1.45cqw;
+  }
+
+  .paper {
+    display: block;
+    block-size: auto;
+    opacity: 0.9;
+    pointer-events: none;
+    rotate: none;
+  }
+  .paper--left { inset-inline-start: -0.03%; inset-block-start: 37.02%; inline-size: 9.36%; }
+  .paper--rtop { inset-inline-start: 93.85%; inset-block-start: 27.37%; inline-size: 6.15%; }
+  .paper--rlow { inset-inline-start: 91.04%; inset-block-start: 62.37%; inline-size: 7.69%; }
+}
+
+/* =========================================================
+   14. JOIN / STATEMENT / FOOTER — proportional from 48em
+   ========================================================= */
+@media (min-width: 48em) {
+  .join {
+    position: relative;
+    /* the artboard starts this section 300 units before the collage ends */
+    margin-block-start: -20.83%;
+    aspect-ratio: 1440 / 660;
+    padding-block: 0;
+  }
+  .join__kicker,
+  .join__banner {
+    position: absolute;
+    margin: 0;
+    transform-origin: 0 0;
+  }
+  .join__kicker {
+    inset-inline-start: 13.98%;
+    inset-block-start: 4.42%;
+    inline-size: max-content;
+    rotate: 14deg;
+    font-size: 1.14cqw;
+  }
+  .join__banner {
+    inset-inline-start: 17.02%;
+    inset-block-start: 11.41%;
+    inline-size: 51.32%;
+    block-size: 7.64cqw;
+    padding: 0;
+    border-width: 0.14cqw;
+    padding-block-end: 0.12em;
+    rotate: 20.0852deg;
+    font-size: 6.35cqw;
+  }
+
+  .statement { padding-block: 0 var(--space-3xl); }
+  .statement__box {
+    inline-size: 78%;
+    margin-inline: 29.5% 0;
+    border-inline-end: 0;
+    font-size: 2.3cqw;
+    line-height: 1.3;
+    padding: 0.55em 0.7em;
+  }
+
+  .site-footer__grid {
+    grid-template-columns: 1.45fr 1fr 1.15fr 1.15fr 0.8fr;
+  }
+}
+
+
