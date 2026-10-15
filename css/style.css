@@ -400,7 +400,7 @@ body::after {
   margin-block-start: 5%;
   rotate: -1deg;
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 8.6cqw;
   line-height: 0.84;
   letter-spacing: 0.005em;
@@ -696,14 +696,17 @@ body::after {
   .intro__title { position: static; }
 
   .intro__collage .tape {
-    font-size: 8.3cqw;
+    /* same paper margin as the benefits tapes — the artboard box is 140 tall */
+    font-size: 8.22cqw;
     letter-spacing: -0.03em;
+    padding: 0.14em 0.14em 0.29em;
+    transform-origin: 0 0;   /* so the artboard's corner coordinates transfer 1:1 */
   }
   /* .intro__collage prefix so these outrank the reset above */
-  .intro__collage .tape--a { inset-inline-start: 8.5%;  inset-block-start: 6.2%;  rotate: 5deg;    }
-  .intro__collage .tape--b { inset-inline-start: 24.8%; inset-block-start: 12.6%; rotate: -4.5deg; }
-  .intro__collage .tape--c { inset-inline-start: 8.2%;  inset-block-start: 32.4%; rotate: -7.5deg; }
-  .intro__collage .tape--d { inset-inline-start: 29.6%; inset-block-start: 38.6%; rotate: -3deg;   }
+  .intro__collage .tape--a { inset-inline-start: 9.8%;  inset-block-start: 6.14%;  rotate: 2deg;  }   /* 141 / 1090 */
+  .intro__collage .tape--b { inset-inline-start: 23.94%; inset-block-start: 16.12%; rotate: -1deg; }   /* 345 / 1158 */
+  .intro__collage .tape--c { inset-inline-start: 8.75%;  inset-block-start: 36.77%; rotate: -2deg; }   /* 126 / 1297 */
+  .intro__collage .tape--d { inset-inline-start: 29.31%; inset-block-start: 39.09%; rotate: 2deg;  }   /* 422 / 1313 */
 
   .intro__shot--handoff {
     inset-inline-start: 62.9%;
@@ -721,7 +724,7 @@ body::after {
     inline-size: 30.4%;
     min-block-size: 7.6cqw;
     font-size: max(0.6875rem, 1.5cqw);
-    padding: 0.62em 0.72em 0.66em;
+    padding: 0.75cqw 0.9cqw 0.82cqw;
     z-index: 2;
   }
   .intro__collage .callout--kr {
@@ -730,19 +733,19 @@ body::after {
     inset-block-start: 61.4%;
     inline-size: 40.9%;
     font-size: max(0.9rem, 2.12cqw);
-    padding: 0.62em 0.72em 0.66em;
+    padding: 0.75cqw 0.9cqw 0.82cqw;
   }
 
   .intro__shot--table {
     inset-inline-start: 8.4%;
-    inset-block-start: 61.7%;
+    inset-block-start: 65.2%;   /* clear of the CLUB tape above */
     inline-size: 39.1%;
   }
   .intro__shot--table img { aspect-ratio: 750 / 313; object-fit: cover; object-position: 50% 50%; }
 
   .intro__wordmark {
     inset-inline-start: 50.2%;
-    inset-block-start: 84.5%;
+    inset-block-start: 80.6%;
     font-size: 5.2cqw;
     letter-spacing: -0.01em;
     line-height: 0.84;
@@ -789,7 +792,7 @@ body::after {
    ========================================================= */
 @media (min-width: 60em) {
 
-  .benefits { padding-block: var(--space-3xl) 2%; }
+  .benefits { padding-block: var(--space-xl) 2%; }
 
   /* ---- the head: tapes, marginalia, the Korean box --------- */
   .benefits__head {
@@ -816,13 +819,13 @@ body::after {
   }
 
   .benefits__head .tape--m1  { inset-inline-start: 8.92%; inset-block-start: 11.43%;   rotate: 1deg;    z-index: 2; }
-  .benefits__head .tape--m1b { inset-inline-start: 47.8%; inset-block-start: 10.77%; rotate: 5.85deg; z-index: 5; }
+  .benefits__head .tape--m1b { inset-inline-start: 47.23%; inset-block-start: 10.77%; rotate: 5.85deg; z-index: 5; }
   .benefits__head .tape--m3  { inset-inline-start: 61.06%; inset-block-start: 24.82%;   rotate: none;    z-index: 4; }
   .benefits__head .tape--m2  { inset-inline-start: 34.85%; inset-block-start: 40.27%; rotate: -5deg;   z-index: 3; }
 
   .benefits__head .scrawl--bring {
-    inset-inline-start: 52.9%;
-    inset-block-start: 19.66%;
+    inset-inline-start: 54.2%;
+    inset-block-start: 18.2%;
     rotate: -12deg;
     font-size: 1.45cqw;
     z-index: 6;
@@ -834,7 +837,7 @@ body::after {
     block-size: 9.93cqw;
     border: var(--border-thin) solid var(--clr-paper);
     background-color: var(--clr-ink);
-    padding: 0.62em 0.72em 0.66em;
+    padding: 0.75cqw 0.9cqw 0.82cqw;
     font-size: 1.05cqw;
   }
   .benefits__head .micro--right {
@@ -850,7 +853,7 @@ body::after {
     block-size: 9.93cqw;
     font-size: 1.83cqw;
     font-weight: 600;
-    padding: 0.62em 0.72em 0.66em;
+    padding: 0.75cqw 0.9cqw 0.82cqw;
     z-index: 2;
   }
 
