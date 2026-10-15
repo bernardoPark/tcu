@@ -919,7 +919,7 @@ body::after {
   .benefits__collage .perk--community .perk__en   { inset-inline-start: 57.17%; inset-block-start: 93.03%; rotate: 1.79deg; }
 
   /* 5 — CLUB CARD — card, tag and caption dropped 60 to clear the event copy */
-  .benefits__collage .perk--card .perk__shot { inset-inline-start: 46.21%; inset-block-start: 71.1%; inline-size: 27.06%; }
+  .benefits__collage .perk--card .perk__shot { inset-inline-start: 42.53%; inset-block-start: 71.67%; inline-size: 34.71%; }
   .benefits__collage .perk--card .tag        { inset-inline-start: 46.18%; inset-block-start: 84.65%; rotate: 13.82deg; z-index: 4; }
   .benefits__collage .perk--card .perk__kr   { inset-inline-start: 43.56%; inset-block-start: 88.55%; rotate: 2.65deg; z-index: 3; }
   .benefits__collage .perk--card .perk__en   { inset-inline-start: 17.35%; inset-block-start: 71.98%; rotate: 3.09deg; }
